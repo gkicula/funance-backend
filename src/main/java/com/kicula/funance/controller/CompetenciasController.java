@@ -4,6 +4,9 @@ import com.kicula.funance.model.Competencia;
 import com.kicula.funance.repository.CompetenciaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +24,14 @@ public class CompetenciasController {
     }
 
     @PostMapping
-    public void save(@RequestBody Competencia competencia){
+    public ResponseEntity<Competencia> save(@RequestBody Competencia competencia){
 //        System.out.println(competencia.getDescricao());
-        competenciaRepository.save(competencia);
+//        return competenciaRepository.save(competencia);
+        return ResponseEntity.status(HttpStatus.CREATED).body(competenciaRepository.save(competencia));
     }
 
+//    @PostMapping
+//    public ResponseEntity<Competencia> delete(@RequestBody Competencia competencia){
+//        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(competenciaRepository.delete(competencia));
+//    }
 }
